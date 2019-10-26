@@ -1,15 +1,12 @@
 import cv2
 import numpy as np
-import scipy
-from scipy.misc import imread
-import cPickle as pickle
-import random
 import os
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import imread
 
 # Feature extractor
 def extract_features(image_path, vector_size=32):
-    image = imread(image_path, mode="RGB")
+    image = imread(image_path)
     try:
         # Using KAZE, cause SIFT, ORB and other was moved to additional module
         # which is adding addtional pain during install
@@ -32,7 +29,7 @@ def extract_features(image_path, vector_size=32):
             # end of our feature vector
             dsc = np.concatenate([dsc, np.zeros(needed_size - dsc.size)])
     except cv2.error as e:
-        print 'Error: ', e
+        print ('Error: ', e)
         return None
 
     return dsc
@@ -43,10 +40,6 @@ def batch_extractor(images_path, pickled_db_path="features.pck"):
 
     result = {}
     for f in files:
-        print 'Extracting features from image %s' % f
+        print ('Extracting features from image %s' % f)
         name = f.split('/')[-1].lower()
         result[name] = extract_features(f)
-    
-    # saving all our feature vectors in pickled file
-    with open(pickled_db_path, 'w') as fp:
-        pickle.dump(result, fp)
