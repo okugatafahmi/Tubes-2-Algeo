@@ -3,6 +3,7 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import imread
+from function import *
 
 # Feature extractor
 def extract_features(image_path, vector_size=32):
@@ -41,34 +42,18 @@ def batch_extractor(images_path):
     result = {}
     for f in files:
         print ('Extracting features from image %s' % f)
-        name = f.split('/')[-1].lower()
+        name = f.split('/')[-1]
         result[name] = extract_features(f)
     return result
 
-def panjang(V):
-    res=0
-    for val in V:
-        res += val*val
-    return res
-
-def minus(V1,V2):
-# Mengurangi V1 dengan V2. Prekondisi: panjang(V1)=panjang(V2)
-    V3=V1
-    for i in range(0,len(V1)):
-        V3[i] -= V2[i]
-    return V3
-
-
-res = batch_extractor('data/referensi/pins_Aaron Paul')
+path = 'data/referensi/pins_Aaron Paul'
+res = batch_extractor(path)
 arr = {}
 for k,v in res.items():
     print(k)
+    img_path = os.path.join(path,k)
+    img = imread(img_path)
+    plt.imshow(img)
+    plt.show()
     print(v)
     print(type(v))
-    arr=v
-    break
-print
-print(len(arr))
-new_arr = minus(arr,arr)
-for val in new_arr:
-    print(val)
