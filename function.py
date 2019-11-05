@@ -8,10 +8,10 @@ def cos_similarity(V1,V2):
 	return ((dot(V1,V2))/(panjang(V1)*panjang(V2)))
 
 def panjang(V):
-    res=0
+    hasil=0
     for val in V:
-        res += val*val
-    return res
+        hasil += val*val
+    return hasil**0.5
 
 def minus(V1,V2):
 # Mengurangi V1 dengan V2. Prekondisi: panjang(V1)=panjang(V2)
@@ -21,8 +21,5 @@ def minus(V1,V2):
     return V3
 
 def jarak(V1,V2):
-    sum = 0
-    for i in range(0,len(V1)):
-        sum += (minus(V1,V2))**2
-    d = sum**(0.5)
-    return d
+    hasil = panjang(minus(V1,V2))
+    return hasil

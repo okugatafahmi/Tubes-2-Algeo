@@ -40,23 +40,8 @@ def batch_extractor(images_path):
 
     result = {}
     for f in files:
-        print ('Extracting features from image %s' % f)
-        name = f.split('/')[-1]
+        # print ('Extracting features from image %s' % f)
+        # name = f.split('/')[-1]
+        name = f
         result[name] = extract_features(f)
     return result
-
-path = 'data/referensi/'
-f = open('data.txt','a')
-for folder in sorted(os.listdir(path)):
-    img_folder = os.path.join(path,folder)
-    print(img_folder)
-    res = batch_extractor(img_folder)
-    print(len(res))
-    
-    for k,v in res.items():
-        f.write(k)
-        f.write('\n')
-        for val in v:
-            f.write(str(val)+' ')
-        f.write('\n')
-f.close()
