@@ -46,22 +46,28 @@ def show():
     
     
     plt.imshow(img)
+    plt.show()
     vector_extract = extract_features(img_name)
     # img_name = img_name.split('/')[-1]
     result["text"] = "File foto yang akan diuji:\n"+img_name.split('/')[-1]+'\n'
 
-    list_result = match(vector_extract,dict_img,pilihan,n_img)
+    pil = int(pilihan.get())
+    list_result = match(vector_extract,dict_img,pil)
     print(vector_extract)
-    print(dict_img[img_name])
-    list_result = sorted(list_result, key=lambda tup: tup[1])
+    # print(dict_img[img_name])
+    if (pil): #euclid
+        list_result = sorted(list_result, key=lambda tup: tup[1])
+    else:
+        list_result = sorted(list_result, key=lambda tup: tup[1], reverse=True)
 
     result["text"] += "\nFoto yang mirip adalah:\n"
     for i in range(n_img):
         print(list_result[i][0])
-        plt.imread(list_result[i][0])
         print(list_result[i][1])
         result["text"] += list_result[i][0].split('/')[-1]+'\n'+str(list_result[i][1])+'\n'
-    plt.show()
+        img = imread(list_result[i][0])
+        plt.imshow(img)
+        plt.show()
 
 def browse_file():
     img_name = filedialog.askopenfilename(initialdir = "data/", title = "Select A File", filetypes =(("jpeg files","*.jpg"),) )

@@ -27,11 +27,13 @@ def match(vector_extract,data,tipe):
 # tipe : 0 berarti dengan cosine, 1 dengan euclidean
 # return nya adalah dict('namaFile',nilai pencocokan)
     res = []
-    i = 0
+    i=0
     for k,v in data.items():
         if (tipe == 0):
             hasil_match = cos_similarity(vector_extract,v)
         elif (tipe == 1):
             hasil_match = jarak(vector_extract,v)
+        print(hasil_match)
         res.append((k,hasil_match))
+        i+=1
     return res

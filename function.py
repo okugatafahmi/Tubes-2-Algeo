@@ -14,11 +14,8 @@ def panjang(V):
     return hasil**0.5
 
 def minus(V1,V2):
-# Mengurangi V1 dengan V2. Prekondisi: panjang(V1)=panjang(V2)
-    V3=V1
-    for i in range(0,len(V1)):
-        V3[i] -= V2[i]
-    return V3
+# Mengurangi V1 dengan V2. Prekondisi: dimensi(V1)=dimensi(V2)
+    return V1-V2
 
 def jarak(V1,V2):
     hasil = panjang(minus(V1,V2))
