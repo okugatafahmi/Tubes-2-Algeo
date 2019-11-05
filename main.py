@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import imread
 
 # Feature extractor
-def extract_features(image_path, vector_size=32):
+def extract_features(image_path, vector_size = 32):
     image = imread(image_path)
     try:
         # Using KAZE, cause SIFT, ORB and other was moved to additional module
@@ -59,16 +59,18 @@ def minus(V1,V2):
     return V3
 
 
-res = batch_extractor('data/referensi/pins_Aaron Paul')
+res = batch_extractor('data/referensi/AaronPaul')
 arr = {}
-for k,v in res.items():
-    print(k)
-    print(v)
-    print(type(v))
-    arr=v
-    break
-print
-print(len(arr))
-new_arr = minus(arr,arr)
-for val in new_arr:
-    print(val)
+for nm_file,array in res.items():
+    
+    print(nm)
+#
+#     print(v)
+#     print(type(v))
+#     arr=v
+#     break
+# print
+# print(len(arr))
+# new_arr = (arr,arr)
+# for val in new_arr:
+#     print(val)
