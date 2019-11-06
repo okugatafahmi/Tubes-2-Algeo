@@ -44,7 +44,6 @@ def show():
     if (gagal):
         return
     
-    
     plt.imshow(img)
     plt.show()
     vector_extract = extract_features(img_name)
@@ -80,33 +79,72 @@ dict_img = ReadData()
 
 root = Tk()
 root.geometry("700x500")
-root.title("Pencocokan Gambar")
+root.title("FACE RECOGNITION")
+root.iconbitmap("foto/itbicon.ico")
+root.configure(background="#282829")
 # root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = ("jpeg files","*.jpg"))
 
-
-
-Label(root,text="Masukkan direktori file foto: ").grid(row=0,column=0,sticky=W,padx=3,pady=10)
+Label(root,text="Masukkan direktori file foto : ", font="baloo 10", bg="#282829", fg="white").grid(row=0,column=0,sticky=W,padx=3,pady=10)
 namaFile = Entry(root)
 namaFile.grid(row=0,column=1,sticky=W, ipady=3)
-err_namaFile = Label(root)
+err_namaFile = Label(root, bg="#282829", fg="white")
 err_namaFile.grid(row=1,column=1,sticky=W)
-Button(root,text='Browse File',command=browse_file).grid(row=0,column=2,sticky=W,padx=3)
+browse = PhotoImage(file="foto/browse.png")
+Button(root,text='Browse File',command=browse_file, image=browse, border=0, bg="#282829", activebackground="#282829").grid(row=0,column=2,sticky=W,padx=3)
 
-Label(root,text="Masukkan banyak foto: ").grid(row=2,column=0,sticky=W,padx=3,pady=10)
+Label(root,text="Masukkan banyak foto : ", font="baloo 10", bg="#282829", fg="white" ).grid(row=2,column=0,sticky=W,padx=3,pady=10)
 banyakFoto = Entry(root)
 banyakFoto.grid(row=2,column=1,sticky=W,ipady=3)
-err_banyakFoto = Label(root)
+err_banyakFoto = Label(root, bg="#282829", fg="white")
 err_banyakFoto.grid(row=3,column=1,sticky=W)
 
 pilihan = IntVar()
 pilihan.set(-1)
-err_pilihan = Label(root)
+err_pilihan = Label(root, bg="#282829", fg="white")
 err_pilihan.grid(row=4,column=0,sticky=W)
-Radiobutton(root, text="Cosine Similarity", variable=pilihan, value=0).grid(row=5,column=0,sticky=W)
-Radiobutton(root, text="Euclidean Distance", variable=pilihan, value=1).grid(row=5,column=1,sticky=W)
+cosineON = PhotoImage(file="foto/cosineON.png")
+cosineOFF = PhotoImage(file="foto/cosineOFF.png")
+euclidianON = PhotoImage(file="foto/euclidianON.png")
+euclidianOFF = PhotoImage(file="foto/euclidianOFF.png")
 
-Button(root,text="Compare",command=show).grid(row=10,column=0,sticky=W,padx=3,pady=5)
+Radiobutton(
+    root,
+    text="Cosine Similarity",
+    variable=pilihan,
+    value=0,
+    indicatoron=False,
+    image=cosineOFF,
+    selectimage=cosineON,
+    border=0,
+    selectcolor="#282829",
+    activebackground="#282829",
+    highlightbackground="#282829",
+    bg="#282829").grid(row=5,column=0,sticky=W)
 
-result=Label(root, justify=LEFT)
+Radiobutton(
+    root, 
+    text="Euclidean Distance",
+    variable=pilihan,
+    value=1,
+    indicatoron=False,
+    image=euclidianOFF,
+    selectimage=euclidianON,
+    bd=0,
+    selectcolor="#282829",
+    activebackground="#282829",
+    highlightbackground="#282829",
+    bg="#282829").grid(row=5,column=1,sticky=W)
+
+compare = PhotoImage(file="foto/compare.png")
+Button(
+    root,
+    text="Compare",
+    command=show,
+    image=compare,
+    border=0,
+    activebackground="#282829",
+    bg="#282829").grid(row=10,column=0,sticky=W,padx=3,pady=5)
+result=Label(root, justify=LEFT, bg="#282829", fg="white")
 result.grid(row=11,column=0,sticky=W)
+
 root.mainloop()
