@@ -1,5 +1,4 @@
 from tkinter import *
-# from tkinter.messagebox import *
 from tkinter import filedialog
 import os
 import matplotlib.pyplot as plt
@@ -7,9 +6,9 @@ from matplotlib.pyplot import imread
 from main import ReadData, match
 from extractor import extract_features
 
-#pins_alexandra daddario/alexandra daddario0.jpg
 
 def show():
+# menampilkan foto
     gagal=False
     
     if (len(namaFile.get())==0):
