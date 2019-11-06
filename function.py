@@ -1,3 +1,5 @@
+import numpy
+
 def dot(V1,V2):
 	hasil = 0
 	for i in range (0,len(V1)):
@@ -15,7 +17,10 @@ def panjang(V):
 
 def minus(V1,V2):
 # Mengurangi V1 dengan V2. Prekondisi: dimensi(V1)=dimensi(V2)
-    return V1-V2
+    hasil = []
+    for i in range (0,len(V1)):
+        hasil.append(V1[i]-V2[i])
+    return numpy.array(hasil)
 
 def jarak(V1,V2):
     hasil = panjang(minus(V1,V2))

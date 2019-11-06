@@ -48,13 +48,13 @@ def show():
     plt.title(img_name)
     plt.show()
     vector_extract = extract_features(img_name)
-    # img_name = img_name.split('/')[-1]
+    
     result["text"] = "File foto yang akan diuji:\n"+img_name.split('/')[-1]+'\n'
 
     pil = int(pilihan.get())
     list_result = match(vector_extract,dict_img,pil)
     print(vector_extract)
-    # print(dict_img[img_name])
+    
     if (pil): #euclid
         list_result = sorted(list_result, key=lambda tup: tup[1])
     else:
@@ -81,10 +81,8 @@ dict_img = ReadData()
 
 root = Tk()
 root.geometry("700x500")
-root.title("FACE RECOGNITION")
-root.iconbitmap("foto/itbicon.ico")
+root.title("Face Recognition")
 root.configure(background="#282829")
-# root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = ("jpeg files","*.jpg"))
 
 Label(root,text="Masukkan direktori file foto : ", font="baloo 10", bg="#282829", fg="white").grid(row=0,column=0,sticky=W,padx=3,pady=10)
 namaFile = Entry(root)
