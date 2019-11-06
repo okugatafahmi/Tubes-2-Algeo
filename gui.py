@@ -45,6 +45,7 @@ def show():
         return
     
     plt.imshow(img)
+    plt.title(img_name)
     plt.show()
     vector_extract = extract_features(img_name)
     # img_name = img_name.split('/')[-1]
@@ -66,6 +67,7 @@ def show():
         result["text"] += list_result[i][0].split('/')[-1]+'\n'+str(list_result[i][1])+'\n'
         img = imread(list_result[i][0])
         plt.imshow(img)
+        plt.title(list_result[i][0])
         plt.show()
 
 def browse_file():
