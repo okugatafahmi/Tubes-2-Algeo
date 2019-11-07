@@ -33,8 +33,8 @@ def match(vector_extract,data,tipe):
             hasil_match = cos_similarity(vector_extract,v)
         elif (tipe == 1):
             hasil_match = jarak(vector_extract,v)
-        print(k)
+        print(k.split('/')[-1])
+        print(hasil_match)
         res.append((k,hasil_match))
         i+=1
-        if (i==3): break
     return res

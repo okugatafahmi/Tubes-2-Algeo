@@ -20,7 +20,7 @@ def change_img(tipe):
     img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
     canvas2.itemconfig(img_on_canvas, image = img)
     canvas2.image = img
-    hasil_label["text"] = "Foto hasil: "+arr_img_name[idx_img].split('/')[-1]
+    hasil_label["text"] = "Foto hasil: "+arr_img_name[idx_img].split('/')[-1]+" ("+str(idx_img)+")"
 
 def show():
     global arr_img_name, idx_img, canvas2, img_on_canvas, hasil_label
@@ -30,15 +30,16 @@ def show():
     window.configure(background="#282829")
     
     uji_label = Label(window,text="Foto uji: "+arr_img_name[0].split('/')[-1], font="baloo 10", bg="#282829", fg="white" )
-    uji_label.place(x=0,y=100)
+    uji_label.place(x=0,y=100, anchor = W)
     canvas1 = Canvas(window,width = 300, height = 300)
     canvas1.pack(side = "left")
     img = ImageTk.PhotoImage(Image.open(arr_img_name[0]))
     canvas1.create_image(150,150, image = img)
     canvas1.image = img
 
-    hasil_label = Label(window,text="Foto hasil: "+arr_img_name[idx_img].split('/')[-1], font="baloo 10", bg="#282829", fg="white", anchor = E )
-    hasil_label.place(x=500,y=100)
+    hasil_label = Label(window,text="Foto hasil: "+arr_img_name[idx_img].split('/')[-1]+" ("+str(idx_img)+")",
+                    font="baloo 10", bg="#282829", fg="white", anchor = E )
+    hasil_label.place(x=800,y=100, anchor = E)
     canvas2 = Canvas(window,width = 300, height = 300)
     canvas2.pack(side = "right")
     img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
@@ -47,26 +48,27 @@ def show():
 
     Button(
     window,
-    text="Next",
-    command=lambda: change_img(True),
-    border=0,
-    activebackground="#282829",
-    bg="#282829").pack(side = "bottom")
-    Button(
-    window,
     text="Prev",
     command=lambda: change_img(False),
-    border=0,
     activebackground="#282829",
-    bg="#282829").pack(side = "bottom")
+    fg="white",
+    bg="#282829").place(x=350, y=600, anchor = SE)
+    Button(
+    window,
+    text="Next",
+    command=lambda: change_img(True),
+    activebackground="#282829",
+    fg="white",
+    bg="#282829").place(x=450, y=600, anchor = SW)
 
 
 
 def compare():
 # menampilkan foto
     gagal=False
-    global arr_img_name
+    global arr_img_name, idx_img
     arr_img_name = []
+    idx_img = 1
     if (len(namaFile.get())==0):
         err_namaFile['text'] = 'Nama file harus diisi\n'
         gagal = True
