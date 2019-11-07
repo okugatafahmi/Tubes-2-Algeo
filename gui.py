@@ -7,16 +7,20 @@ from main import ReadData, match
 from extractor import extract_features
 from PIL import ImageTk, Image
 
-arr_img_name=[] 
+arr_img_name=[]
 idx_img=1
 
-def next_img():
-    global idx_img
-    idx_img +=1
-    show()
+def change_img():
+    global arr_img_name, idx_img, canvas2, img_on_canvas
+    n = len(arr_img_name)-1
+    idx_img = (idx_img%n)+1
+    # idx_img = ((idx_img+n)%n)+1
+    img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
+    canvas2.itemconfig(img_on_canvas, image = img)
+    canvas2.image = img
 
 def show():
-    global arr_img_name, idx_img
+    global arr_img_name, idx_img, canvas2, img_on_canvas
     window = Toplevel(root)
     window.title("Hasil")
     window.geometry("800x600")
@@ -30,16 +34,23 @@ def show():
     canvas2 = Canvas(window,width = 300, height = 300)
     canvas2.pack(side = "right")
     img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
-    canvas2.create_image(150,150, image = img)
+    img_on_canvas = canvas2.create_image(150,150, image = img)
     canvas2.image = img
 
     Button(
     window,
     text="Next",
-    command=next_img,
+    command=change_img,
     border=0,
     activebackground="#282829",
     bg="#282829").pack(side = "bottom")
+    # Button(
+    # window,
+    # text="Next",
+    # command=change_img(False),
+    # border=0,
+    # activebackground="#282829",
+    # bg="#282829").pack(side = "bottom")
 
 
 
