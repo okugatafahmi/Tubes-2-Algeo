@@ -10,27 +10,34 @@ from PIL import ImageTk, Image
 arr_img_name=[]
 idx_img=1
 
-def change_img():
-    global arr_img_name, idx_img, canvas2, img_on_canvas
+def change_img(tipe):
+    global arr_img_name, idx_img, canvas2, img_on_canvas, hasil_label
     n = len(arr_img_name)-1
-    idx_img = (idx_img%n)+1
-    # idx_img = ((idx_img+n)%n)+1
+    if (tipe):
+        idx_img = (idx_img%n)+1
+    else:
+        idx_img = ((idx_img+n-2)%n)+1
     img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
     canvas2.itemconfig(img_on_canvas, image = img)
     canvas2.image = img
+    hasil_label["text"] = "Foto hasil: "+arr_img_name[idx_img]
 
 def show():
-    global arr_img_name, idx_img, canvas2, img_on_canvas
+    global arr_img_name, idx_img, canvas2, img_on_canvas, hasil_label
     window = Toplevel(root)
     window.title("Hasil")
     window.geometry("800x600")
     window.configure(background="#282829")
+    
+    Label(window,text="Foto uji: "+arr_img_name[0], font="baloo 10", bg="#282829", fg="white" ).pack(side = "top")
     canvas1 = Canvas(window,width = 300, height = 300)
     canvas1.pack(side = "left")
     img = ImageTk.PhotoImage(Image.open(arr_img_name[0]))
     canvas1.create_image(150,150, image = img)
     canvas1.image = img
 
+    hasil_label = Label(window,text="Foto hasil: "+arr_img_name[idx_img], font="baloo 10", bg="#282829", fg="white" )
+    hasil_label.pack(side = "top")
     canvas2 = Canvas(window,width = 300, height = 300)
     canvas2.pack(side = "right")
     img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
@@ -40,17 +47,17 @@ def show():
     Button(
     window,
     text="Next",
-    command=change_img,
+    command=lambda: change_img(True),
     border=0,
     activebackground="#282829",
     bg="#282829").pack(side = "bottom")
-    # Button(
-    # window,
-    # text="Next",
-    # command=change_img(False),
-    # border=0,
-    # activebackground="#282829",
-    # bg="#282829").pack(side = "bottom")
+    Button(
+    window,
+    text="Prev",
+    command=lambda: change_img(False),
+    border=0,
+    activebackground="#282829",
+    bg="#282829").pack(side = "bottom")
 
 
 
