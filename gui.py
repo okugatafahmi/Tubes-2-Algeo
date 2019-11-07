@@ -20,7 +20,7 @@ def change_img(tipe):
     img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
     canvas2.itemconfig(img_on_canvas, image = img)
     canvas2.image = img
-    hasil_label["text"] = "Foto hasil: "+arr_img_name[idx_img]
+    hasil_label["text"] = "Foto hasil: "+arr_img_name[idx_img].split('/')[-1]
 
 def show():
     global arr_img_name, idx_img, canvas2, img_on_canvas, hasil_label
@@ -29,15 +29,16 @@ def show():
     window.geometry("800x600")
     window.configure(background="#282829")
     
-    Label(window,text="Foto uji: "+arr_img_name[0], font="baloo 10", bg="#282829", fg="white" ).pack(side = "top")
+    uji_label = Label(window,text="Foto uji: "+arr_img_name[0].split('/')[-1], font="baloo 10", bg="#282829", fg="white" )
+    uji_label.place(x=0,y=100)
     canvas1 = Canvas(window,width = 300, height = 300)
     canvas1.pack(side = "left")
     img = ImageTk.PhotoImage(Image.open(arr_img_name[0]))
     canvas1.create_image(150,150, image = img)
     canvas1.image = img
 
-    hasil_label = Label(window,text="Foto hasil: "+arr_img_name[idx_img], font="baloo 10", bg="#282829", fg="white" )
-    hasil_label.pack(side = "top")
+    hasil_label = Label(window,text="Foto hasil: "+arr_img_name[idx_img].split('/')[-1], font="baloo 10", bg="#282829", fg="white", anchor = E )
+    hasil_label.place(x=500,y=100)
     canvas2 = Canvas(window,width = 300, height = 300)
     canvas2.pack(side = "right")
     img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
