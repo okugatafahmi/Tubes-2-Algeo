@@ -5,9 +5,26 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import imread
 from main import ReadData, match
 from extractor import extract_features
-
+from PIL import ImageTk, Image
 
 def show():
+    window = Toplevel(root)
+    window.title("Hasil")
+    window.geometry("600x600")
+    window.configure(background="#282829")
+    canvas1 = Canvas(window,width = 300, height = 300)
+    canvas1.pack(side = "left")
+    img = ImageTk.PhotoImage(Image.open(arr_img_name[0]))
+    canvas1.create_image(150,150, image = img)
+    canvas1.image = img
+
+    canvas2 = Canvas(window,width = 300, height = 300)
+    canvas2.pack(side = "right")
+    img = ImageTk.PhotoImage(Image.open(arr_img_name[1]))
+    canvas2.create_image(150,150, image = img)
+    canvas2.image = img
+
+def compare():
 # menampilkan foto
     gagal=False
     
@@ -43,9 +60,7 @@ def show():
     if (gagal):
         return
     
-    plt.imshow(img)
-    plt.title(img_name)
-    plt.show()
+    arr_img_name.append(img_name)
     vector_extract = extract_features(img_name)
     
     result["text"] = "File foto yang akan diuji:\n"+img_name.split('/')[-1]+'\n'
@@ -64,10 +79,8 @@ def show():
         print(list_result[i][0])
         print(list_result[i][1])
         result["text"] += list_result[i][0].split('/')[-1]+'\n'+str(list_result[i][1])+'\n'
-        img = imread(list_result[i][0])
-        plt.imshow(img)
-        plt.title(list_result[i][0])
-        plt.show()
+        arr_img_name.append(list_result[i][0])    
+    show()
 
 def browse_file():
     img_name = filedialog.askopenfilename(initialdir = "data/", title = "Select A File", filetypes =(("jpeg files","*.jpg"),) )
@@ -77,9 +90,10 @@ def browse_file():
     
 # Membaca data
 dict_img = ReadData()
+arr_img_name = []
 
 root = Tk()
-root.geometry("700x500")
+root.geometry("650x500")
 root.title("Face Recognition")
 root.configure(background="#282829")
 
@@ -134,12 +148,12 @@ Radiobutton(
     highlightbackground="#282829",
     bg="#282829").grid(row=5,column=1,sticky=W)
 
-compare = PhotoImage(file="foto/compare.png")
+compare_img = PhotoImage(file="foto/compare.png")
 Button(
     root,
     text="Compare",
-    command=show,
-    image=compare,
+    command=compare,
+    image=compare_img,
     border=0,
     activebackground="#282829",
     bg="#282829").grid(row=10,column=0,sticky=W,padx=3,pady=5)
