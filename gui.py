@@ -7,10 +7,19 @@ from main import ReadData, match
 from extractor import extract_features
 from PIL import ImageTk, Image
 
+arr_img_name=[] 
+idx_img=1
+
+def next_img():
+    global idx_img
+    idx_img +=1
+    show()
+
 def show():
+    global arr_img_name, idx_img
     window = Toplevel(root)
     window.title("Hasil")
-    window.geometry("600x600")
+    window.geometry("800x600")
     window.configure(background="#282829")
     canvas1 = Canvas(window,width = 300, height = 300)
     canvas1.pack(side = "left")
@@ -20,14 +29,25 @@ def show():
 
     canvas2 = Canvas(window,width = 300, height = 300)
     canvas2.pack(side = "right")
-    img = ImageTk.PhotoImage(Image.open(arr_img_name[1]))
+    img = ImageTk.PhotoImage(Image.open(arr_img_name[idx_img]))
     canvas2.create_image(150,150, image = img)
     canvas2.image = img
+
+    Button(
+    window,
+    text="Next",
+    command=next_img,
+    border=0,
+    activebackground="#282829",
+    bg="#282829").pack(side = "bottom")
+
+
 
 def compare():
 # menampilkan foto
     gagal=False
-    
+    global arr_img_name
+    arr_img_name = []
     if (len(namaFile.get())==0):
         err_namaFile['text'] = 'Nama file harus diisi\n'
         gagal = True
@@ -90,7 +110,7 @@ def browse_file():
     
 # Membaca data
 dict_img = ReadData()
-arr_img_name = []
+
 
 root = Tk()
 root.geometry("650x500")
