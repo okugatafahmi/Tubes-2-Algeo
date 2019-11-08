@@ -13,7 +13,7 @@ pip install opencv-python
 3. Jalankan program gui.py untuk memulai pencocokan gambar.
 
 ## Struktur file
-'''
+```
 data
     referensi   // menyimpan foto referensi
         folder-folder tiap orang
@@ -21,4 +21,4 @@ data
         folder-folder tiap orang
 foto    // menyimpan foto untuk tombol program
 program python
-'''
+```
